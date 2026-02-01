@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All The Best – Madhyamik 2026</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
+body{
+min-height:100vh;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:#fff;overflow-x:hidden
+}
+.container{padding:20px;max-width:480px;margin:auto}
+.allbest{
+font-size:2.3rem;text-align:center;font-weight:900;
+color:#ffd369;animation:glow 2s infinite alternate
+}
+@keyframes glow{
+from{text-shadow:0 0 10px #ffd369}
+to{text-shadow:0 0 25px #ffea00}
+}
+.date{text-align:center;margin-top:8px;font-size:.95rem;opacity:.9}
+.card{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+border-radius:16px;padding:18px;margin-top:20px
+}
+.long-message{font-size:.95rem;line-height:1.6;opacity:.95}
+.countdown{text-align:center;margin-top:20px}
+.timer{display:flex;justify-content:space-between;margin-top:10px}
+.box{
+flex:1;margin:5px;padding:10px;
+background:rgba(0,0,0,.35);
+border-radius:10px
+}
+.box h2{font-size:1.3rem;color:#00ffd5}
+.box p{font-size:.7rem;opacity:.8}
+.final-msg{
+margin-top:20px;text-align:center;
+font-size:1.3rem;color:#ffd369
+}
+.music-btn,.share-btn{
+margin-top:15px;width:100%;padding:12px;
+border:none;border-radius:30px;
+background:#00ffd5;color:#000;
+font-weight:700;font-size:1rem
+}
+.share-btn{background:#ffd369}
+
+.footer{
+margin:30px 0 10px;
+text-align:center;font-size:.8rem;opacity:.9
+}
+.follow{
+display:flex;justify-content:center;
+align-items:center;gap:8px;margin-top:6px
+}
+.follow img{
+width:20px;height:20px
+}
+.footer a{
+color:#00ffd5;text-decoration:none;font-weight:600
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="allbest">ALL THE BEST</div>
+<div class="date">Madhyamik Examination – 02/02/26</div>
+
+<div class="card">
+<div class="long-message">
+This examination is just one chapter of your life, not the whole story.
+Do your best with honesty, confidence and patience. Results do not
+define your intelligence or your future. Whatever the outcome is,
+accept it with courage and keep moving forward. Believe in yourself,
+trust your preparation, and stay calm. Your effort matters more than
+numbers. Success will find you in its own time.
+</div>
+</div>
+
+<div class="card countdown" id="countdown">
+<div class="timer" id="timerBox">
+<div class="box"><h2 id="days">0</h2><p>DAYS</p></div>
+<div class="box"><h2 id="hours">0</h2><p>HOURS</p></div>
+<div class="box"><h2 id="minutes">0</h2><p>MINUTES</p></div>
+<div class="box"><h2 id="seconds">0</h2><p>SECONDS</p></div>
+</div>
+</div>
+
+<button class="music-btn" id="musicBtn">🔊 Tap to Enable Background Music</button>
+<button class="share-btn" onclick="sharePage()">📤 Share with Friends</button>
+
+<div class="footer">
+Created by <b>iam_akashray_</b>
+
+<div class="follow">
+<a href="https://instagram.com/iam_akashray_" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+</a>
+<a href="https://instagram.com/iam_akashray_" target="_blank">
+Follow on Instagram
+</a>
+</div>
+</div>
+
+</div>
+
+<audio id="bgm" loop preload="auto">
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* MUSIC */
+const audio = document.getElementById("bgm");
+const btn = document.getElementById("musicBtn");
+
+btn.addEventListener("click", () => {
+audio.muted = true;
+audio.play().then(() => {
+audio.muted = false;
+audio.volume = 0.6;
+btn.innerText = "🎵 Music Playing";
+btn.disabled = true;
+});
+});
+
+/* SHARE */
+function sharePage(){
+if(navigator.share){
+navigator.share({
+title:"All The Best – Madhyamik 2026",
+text:"Best wishes for Madhyamik examinees. Believe in yourself!",
+url:window.location.href
+});
+}else{
+alert("Sharing not supported on this browser");
+}
+}
+
+/* EXAM LOGIC */
+const examStart = new Date("February 2, 2026 00:00:00").getTime();
+const examEnd = new Date("February 11, 2026 14:10:00").getTime();
+
+setInterval(()=>{
+const now = new Date().getTime();
+const countdown = document.getElementById("countdown");
+
+if(now > examEnd){
+countdown.innerHTML = `
+<div class="final-msg">
+✨ Hope everything went well ✨<br>
+Be proud of yourself 🌱
+</div>`;
+return;
+}
+
+if(now >= examStart && now <= examEnd){
+countdown.innerHTML = `
+<div class="final-msg">
+🌟 Best of Luck for Your Exams 🌟<br>
+Stay calm & confident 💪
+</div>`;
+return;
+}
+
+const d = examStart - now;
+days.innerText=Math.floor(d/(1000*60*60*24));
+hours.innerText=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+minutes.innerText=Math.floor((d%(1000*60*60))/(1000*60));
+seconds.innerText=Math.floor((d%(1000*60))/1000);
+},1000);
+</script>
+
+</body>
+</html>
